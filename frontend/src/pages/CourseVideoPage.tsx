@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Card } from '@mui/material'
 import CourseVideoDetails from '../components/Course/CourseVideoDetails'
 
-type CourseVideo = {
+interface CourseVideo {
     id: number
     alias: string
     name: string

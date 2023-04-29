@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-type CourseVideos = {
+interface CourseVideos {
     id: number
     alias: string
     name: string

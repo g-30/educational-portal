@@ -1,13 +1,60 @@
 import { useState } from 'react'
-import { Box, Button, TextField, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography, Alert } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+
+interface LoginFormData {
+    email: string
+    password: string
+}
+
+interface LoginResponseData {
+    data: Data
+}
+interface Data {
+    access_token: string
+    expires: number
+    refresh_token: string
+}
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+    const navigate = useNavigate()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log('Email:', email, 'Password:', password)
+
+        const formData: LoginFormData = {
+            email: email,
+            password: password,
+        }
+
+        fetch('https://education.joji.one/caesar-panel/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.statusText)
+                }
+                return response.json() as Promise<LoginResponseData>
+            })
+            .then(({ data }) => {
+                if (data) {
+                    console.log(data)
+                    setEmail('')
+                    setPassword('')
+                    setIsLoggedIn(true)
+                    localStorage.setItem('accessToken', data.access_token)
+                    localStorage.setItem('refreshToken', data.refresh_token)
+                    navigate('/courses')
+                }
+            })
+            .catch((error) => console.error(error))
     }
 
     return (
@@ -23,6 +70,11 @@ const LoginForm = () => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
+                {isLoggedIn && (
+                    <Alert severity="success" sx={{ mt: 2 }}>
+                        Successfully signed in!
+                    </Alert>
+                )}
                 <Box
                     component="form"
                     noValidate

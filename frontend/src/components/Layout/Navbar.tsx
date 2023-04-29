@@ -26,7 +26,11 @@ const NavLink = styled(Link)({
     },
 })
 
-const Navbar: FC<any> = () => {
+interface NavbarProps {
+    isLoggedIn: boolean
+}
+
+const Navbar: FC<NavbarProps> = ({ isLoggedIn }) => {
     return (
         <>
             <AppBar position="static">
@@ -38,15 +42,28 @@ const Navbar: FC<any> = () => {
                         </NavLink>
                     </Typography>
 
-                    <NavButton component={Link} to="/">
-                        Home
-                    </NavButton>
-                    <NavButton component={Link} to="/login">
-                        Login
-                    </NavButton>
-                    <NavButton component={Link} to="/registration">
-                        Register
-                    </NavButton>
+                    {isLoggedIn ? (
+                        <>
+                            <NavButton component={Link} to="/courses">
+                                Courses
+                            </NavButton>
+                            <NavButton component={Link} to="/logout">
+                                Logout
+                            </NavButton>
+                        </>
+                    ) : (
+                        <>
+                            <NavButton component={Link} to="/">
+                                Home
+                            </NavButton>
+                            <NavButton component={Link} to="/login">
+                                Login
+                            </NavButton>
+                            <NavButton component={Link} to="/registration">
+                                Register
+                            </NavButton>
+                        </>
+                    )}
                 </Toolbar>
             </AppBar>
         </>

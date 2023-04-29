@@ -2,7 +2,7 @@ import React, { useState, useEffect, FC } from 'react'
 import { Grid } from '@mui/material'
 import CourseCard from '../components/Course/CourseCard'
 
-type Course = {
+interface Course {
     id: number
     alias: string
     name: string

@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-type Course = {
+interface Course {
     id: number
     alias: string
     name: string
