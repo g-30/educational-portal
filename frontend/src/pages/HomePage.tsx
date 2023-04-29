@@ -12,7 +12,7 @@ const StyledBox = styled(Box)({
     padding: '0 24px',
 })
 
-const Home = () => {
+const HomePage = () => {
     return (
         <StyledBox>
             <Typography variant="h2" mb={4}>
@@ -38,4 +38,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default HomePage
