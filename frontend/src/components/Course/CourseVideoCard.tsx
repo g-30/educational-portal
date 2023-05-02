@@ -2,13 +2,13 @@ import React from 'react'
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-interface CourseVideos {
+interface CourseVideo {
     id: number
     alias: string
     name: string
     preview_url: string
     video_iframe_url: string
-    courseAlias: string
+    courseAlias?: string
 }
 
 const CourseVideoCard = ({
@@ -17,7 +17,7 @@ const CourseVideoCard = ({
     preview_url,
     video_iframe_url,
     courseAlias,
-}: CourseVideos) => {
+}: CourseVideo) => {
     return (
         <Card sx={{ marginTop: '2rem', marginLeft: '.5rem' }}>
             <CardActionArea

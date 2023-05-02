@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
 
 interface CourseVideo {
     id: number
@@ -11,7 +10,6 @@ interface CourseVideo {
 }
 
 const CourseVideoDetails = ({
-    alias,
     name,
     preview_url,
     video_iframe_url,
