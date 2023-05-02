@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
@@ -7,39 +7,22 @@ interface CourseVideo {
     alias: string
     name: string
     preview_url: string
-    video_iframe_url: string
-    courseAlias?: string
+    course_alias: string
 }
 
-const CourseVideoCard = ({
+const CourseVideoCard: FC<CourseVideo> = ({
     alias,
     name,
     preview_url,
-    video_iframe_url,
-    courseAlias,
-}: CourseVideo) => {
+    course_alias,
+}) => {
     return (
         <Card sx={{ marginTop: '2rem', marginLeft: '.5rem' }}>
             <CardActionArea
                 component={Link}
-                to={`/courses/${courseAlias}/${alias}`}
+                to={`/courses/${course_alias}/${alias}`}
             >
-                {video_iframe_url ? (
-                    <iframe
-                        src={video_iframe_url}
-                        width="100%"
-                        height="300px"
-                        title={name}
-                        allowFullScreen
-                    />
-                ) : (
-                    <img
-                        src={preview_url}
-                        alt={name}
-                        width="100%"
-                        height="300px"
-                    />
-                )}
+                <img src={preview_url} alt={name} width="100%" height="300px" />
                 <CardContent>
                     <Typography variant="h6" component="h3">
                         {name}

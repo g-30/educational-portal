@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Box, Button, Typography, styled } from '@mui/material'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ const StyledBox = styled(Box)({
     padding: '0 24px',
 })
 
-const HomePage = () => {
+const HomePage: FC = () => {
     return (
         <StyledBox>
             <Typography variant="h2" mb={4}>

@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react'
+import React, { useState, FormEvent, ChangeEvent, FC } from 'react'
 import { Box, Button, TextField, Typography, Alert } from '@mui/material'
 
 interface RegisterFormData {
@@ -15,13 +15,20 @@ interface RegisterResponseData {
     expires: number
 }
 
-const RegisterForm = () => {
+const RegisterForm: FC = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
     const [isRegistered, setIsRegistered] = useState<boolean>(false)
+
+    const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputVal = event.target.value
+        const numbersOnly = inputVal.replace(/\D/g, '') // remove all non-numeric characters
+        const formattedNumber = `+${numbersOnly}` // add the + symbol back to the beginning
+        setPhone(formattedNumber)
+    }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -96,7 +103,9 @@ const RegisterForm = () => {
                         value={email}
                         autoComplete="email"
                         autoFocus
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setEmail(e.target.value)
+                        }
                     />
                     <TextField
                         required
@@ -106,7 +115,9 @@ const RegisterForm = () => {
                         label="Password"
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setPassword(e.target.value)
+                        }
                     />
                     <TextField
                         required
@@ -116,7 +127,9 @@ const RegisterForm = () => {
                         label="First Name"
                         type="text"
                         value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setFirstName(e.target.value)
+                        }
                     />
                     <TextField
                         required
@@ -126,7 +139,9 @@ const RegisterForm = () => {
                         label="Last Name"
                         type="text"
                         value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setLastName(e.target.value)
+                        }
                     />
                     <TextField
                         required
@@ -136,7 +151,8 @@ const RegisterForm = () => {
                         label="Phone"
                         type="tel"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={handlePhoneChange}
+                        inputProps={{ maxLength: 13 }}
                     />
 
                     <Button

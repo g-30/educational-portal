@@ -4,12 +4,12 @@ import { Grid } from '@mui/material'
 import CourseVideoCard from '../components/Course/CourseVideoCard'
 
 interface Course {
-    status: number
     id: number
     alias: string
     name: string
+    price: number
     preview_url: string
-    videosCount: number
+    videos_count: number
     videos: CourseVideo[]
 }
 
@@ -18,7 +18,6 @@ interface CourseVideo {
     alias: string
     name: string
     preview_url: string
-    video_iframe_url: string
 }
 
 const CoursePage: FC = () => {
@@ -31,9 +30,9 @@ const CoursePage: FC = () => {
             `https://education.joji.one/caesar-panel/api/courses/${courseName}`
         )
             .then((response) => response.json())
-            .then((results: Course) => {
-                setCourseAlias(results.alias)
-                setCourseVideos(results.videos)
+            .then(({ result }: { result: Course }) => {
+                setCourseAlias(result.alias)
+                setCourseVideos(result.videos)
             })
             .catch((error) => console.error(error))
     }, [courseName])
@@ -47,8 +46,7 @@ const CoursePage: FC = () => {
                         alias={course.alias}
                         name={course.name}
                         preview_url={course.preview_url}
-                        video_iframe_url={course.video_iframe_url}
-                        courseAlias={courseAlias}
+                        course_alias={courseAlias}
                     />
                 </Grid>
             ))}

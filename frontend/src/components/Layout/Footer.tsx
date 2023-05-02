@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { styled } from '@mui/material'
 
 const FooterContainer = styled('footer')({
@@ -15,7 +15,7 @@ const FooterContainer = styled('footer')({
     color: 'gray',
 })
 
-const Footer = () => {
+const Footer: FC = () => {
     return (
         <FooterContainer>
             <p>Made with ❤️ by Agartu</p>

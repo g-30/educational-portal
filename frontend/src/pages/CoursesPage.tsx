@@ -6,8 +6,9 @@ interface Course {
     id: number
     alias: string
     name: string
+    price: number
     preview_url: string
-    videosCount: number
+    videos_count: number
 }
 
 const CoursesPage: FC = () => {
@@ -20,8 +21,6 @@ const CoursesPage: FC = () => {
             .catch((error) => console.error(error))
     }, [])
 
-    console.log(courses)
-
     return (
         <Grid container spacing={2}>
             {courses.map((course) => (
@@ -30,8 +29,9 @@ const CoursesPage: FC = () => {
                         id={course.id}
                         alias={course.alias}
                         name={course.name}
+                        price={course.price}
                         preview_url={course.preview_url}
-                        videosCount={course.videosCount}
+                        videos_count={course.videos_count}
                     />
                 </Grid>
             ))}

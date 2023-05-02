@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './components/Layout/Navbar'
 import Footer from './components/Layout/Footer'
 
-const App: FC<any> = () => {
+const App: FC = () => {
     return (
         <div>
             <Navbar isLoggedIn={false} />

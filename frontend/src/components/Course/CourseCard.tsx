@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
     Card,
     CardActionArea,
@@ -13,11 +13,12 @@ interface Course {
     id: number
     alias: string
     name: string
+    price: number
     preview_url: string
-    videosCount: number
+    videos_count: number
 }
 
-const Course = ({ alias, name, preview_url, videosCount }: Course) => {
+const Course: FC<Course> = ({ alias, name, preview_url, videos_count }) => {
     return (
         <Card sx={{ marginTop: '2rem', marginLeft: '.5rem' }}>
             <CardActionArea component={Link} to={`/courses/${alias}`}>
@@ -33,7 +34,7 @@ const Course = ({ alias, name, preview_url, videosCount }: Course) => {
                         {name}
                         <Badge
                             color="primary"
-                            badgeContent={videosCount}
+                            badgeContent={videos_count}
                             sx={{ marginBottom: '2rem', marginLeft: '.5rem' }}
                         ></Badge>
                     </Typography>

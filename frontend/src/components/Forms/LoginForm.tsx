@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FormEvent, ChangeEvent, FC } from 'react'
 import { Box, Button, TextField, Typography, Alert } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
@@ -17,13 +17,13 @@ interface Data {
     refresh_token: string
 }
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
     const navigate = useNavigate()
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         const formData: LoginFormData = {
@@ -92,7 +92,9 @@ const LoginForm = () => {
                         autoComplete="email"
                         autoFocus
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setEmail(e.target.value)
+                        }
                     />
                     <TextField
                         margin="normal"
@@ -104,7 +106,9 @@ const LoginForm = () => {
                         id="password"
                         autoComplete="current-password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setPassword(e.target.value)
+                        }
                     />
                     <Button
                         type="submit"

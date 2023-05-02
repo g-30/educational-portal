@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { Card } from '@mui/material'
 import CourseVideoDetails from '../components/Course/CourseVideoDetails'
 
 interface CourseVideo {
@@ -11,7 +10,7 @@ interface CourseVideo {
     video_iframe_url: string
 }
 
-const CourseVideoPage: React.FC = () => {
+const CourseVideoPage: FC = () => {
     const [courseVideoData, setCourseVideoData] = useState<CourseVideo>({
         id: 0,
         alias: '',
@@ -26,20 +25,24 @@ const CourseVideoPage: React.FC = () => {
             `https://education.joji.one/caesar-panel/api/videos/${courseVideo}`
         )
             .then((response) => response.json())
-            .then((results: CourseVideo) => {
-                setCourseVideoData(results)
+            .then(({ result }: { result: CourseVideo }) => {
+                setCourseVideoData(result)
             })
             .catch((error) => console.error(error))
-    }, [])
+    }, [courseVideo])
 
     return (
-        <CourseVideoDetails
-            id={courseVideoData!.id}
-            alias={courseVideoData!.alias}
-            name={courseVideoData!.name}
-            preview_url={courseVideoData!.preview_url}
-            video_iframe_url={courseVideoData!.video_iframe_url}
-        />
+        <>
+            {courseVideoData.id && (
+                <CourseVideoDetails
+                    id={courseVideoData.id}
+                    alias={courseVideoData.alias}
+                    name={courseVideoData.name}
+                    preview_url={courseVideoData.preview_url}
+                    video_iframe_url={courseVideoData.video_iframe_url}
+                />
+            )}
+        </>
     )
 }
 

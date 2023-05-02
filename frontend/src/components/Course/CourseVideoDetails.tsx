@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
 
 interface CourseVideo {
@@ -9,11 +9,11 @@ interface CourseVideo {
     video_iframe_url: string
 }
 
-const CourseVideoDetails = ({
+const CourseVideoDetails: FC<CourseVideo> = ({
     name,
     preview_url,
     video_iframe_url,
-}: CourseVideo) => {
+}) => {
     return (
         <Card
             sx={{
