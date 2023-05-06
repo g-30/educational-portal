@@ -1,4 +1,5 @@
 /database/
+!/database/init.sql
 /nginx/certbot/
 /nginx/www/
 .env
