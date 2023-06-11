@@ -1,0 +1,92 @@
+version: '3'
+services:
+  database:
+    image: mysql:5.7.16
+    command: --default-authentication-plugin=mysql_native_password --init-file /data/application/init.sql
+    restart: always
+    # ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      # - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./database:/var/lib/mysql
+      - ./database/init.sql:/data/application/init.sql
+    networks:
+      - directus
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DIRECTUS_DB_PASSWORD}
+
+  cache:
+    image: redis:6
+    restart: unless-stopped
+    networks:
+      - directus
+
+  webserver:
+    image: nginx
+    restart: unless-stopped
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/directus.conf
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+      - ./nginx/www:/var/www/html/
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+      - target: 443
+        published: 443
+        mode: host
+    networks:
+      - directus
+  
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./nginx/certbot/conf:/etc/letsencrypt
+      - ./nginx/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  directus:
+    image: directus/directus:latest
+    hostname: directus
+    restart: unless-stopped
+    user: '1001:1001' # set your user:group here. Make sure to chown ./uploads & ./extensions for that user.
+    expose:
+      - '8055'
+    ports:
+      - '8055:8055'
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+    networks:
+      - directus
+    depends_on:
+      - cache
+      - database
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+
+      DB_CLIENT: 'mysql'
+      DB_HOST: 'database'
+      DB_PORT: 3306
+      DB_DATABASE: 'educational'
+      DB_USER: 'root'
+      DB_PASSWORD: ${DIRECTUS_DB_PASSWORD}
+      # DB_CHARSET: 'UTF8MB4'
+
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+
+      HOST: '0.0.0.0'
+      PORT: 8055
+      PUBLIC_URL: "${DIRECTUS_PUBLIC_HOST}/caesar-panel/"
+      EXTENSIONS_AUTO_RELOAD: 'true' # remove in prod
+      ACCESS_TOKEN_TTL: '1d'
+
+networks:
+  directus:
