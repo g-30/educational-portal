@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { Box, Button, Typography, styled } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useAppStore } from '../store/store'
+import { useTranslation } from 'react-i18next'
 
 const StyledBox = styled(Box)({
     display: 'flex',
@@ -13,26 +15,36 @@ const StyledBox = styled(Box)({
 })
 
 const HomePage: FC = () => {
+    const { isLoggedIn } = useAppStore()
+    const navigate = useNavigate()
+    const { t } = useTranslation()
+
+    const handleStart = () => {
+        if (isLoggedIn) {
+            navigate('/courses')
+        } else {
+            navigate('/registration')
+        }
+    }
+
     return (
         <StyledBox>
             <Typography variant="h2" mb={4}>
-                Welcome to Agartu
+                {t('welcome')}
             </Typography>
             <Typography variant="h4" mb={4}>
-                The online education platform for students
+                {t('learn')}
             </Typography>
             <Typography variant="body1" mb={4}>
-                Agartu is an all-in-one platform for students to learn new
-                skills, brush up on old ones, and stay ahead in their studies.
+                {t('description')}
             </Typography>
             <Button
-                component={Link}
-                to="/registration"
+                onClick={handleStart}
                 variant="contained"
                 color="primary"
                 size="large"
             >
-                Get started
+                {t('begin')}
             </Button>
         </StyledBox>
     )

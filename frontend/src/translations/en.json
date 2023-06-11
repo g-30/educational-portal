@@ -1,0 +1,18 @@
+{
+    "home": "Home",
+    "login": "Login",
+    "registration": "Registration",
+    "courses": "Courses",
+    "tests": "Tests",
+    "logout": "Logout",
+    "welcome": " Welcome to Agartu Education",
+    "learn": "Learn and grow with Agartu",
+    "description": "Agartu is an online education platform where students can learn new skills, brush up on old ones, and succeed in their studies.",
+    "begin": "Start",
+    "rights": "All rights reserved.",
+    "login_success": "Login successful",
+    "password": "Password",
+    "name": "Name",
+    "second_name": "Last name",
+    "phone": "Phone"
+}

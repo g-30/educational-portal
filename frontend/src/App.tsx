@@ -6,7 +6,7 @@ import Footer from './components/Layout/Footer'
 const App: FC = () => {
     return (
         <div>
-            <Navbar isLoggedIn={false} />
+            <Navbar />
             <Outlet />
             <Footer />
         </div>

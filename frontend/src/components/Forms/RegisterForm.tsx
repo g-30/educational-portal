@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent, FC } from 'react'
 import { Box, Button, TextField, Typography, Alert } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 interface RegisterFormData {
     email: string
@@ -22,11 +23,12 @@ const RegisterForm: FC = () => {
     const [lastName, setLastName] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
     const [isRegistered, setIsRegistered] = useState<boolean>(false)
+    const { t } = useTranslation()
 
     const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
         const inputVal = event.target.value
-        const numbersOnly = inputVal.replace(/\D/g, '') // remove all non-numeric characters
-        const formattedNumber = `+${numbersOnly}` // add the + symbol back to the beginning
+        const numbersOnly = inputVal.replace(/\D/g, '') // удалить все нечисловые символы
+        const formattedNumber = `+${numbersOnly}` // добавить символ + в начало
         setPhone(formattedNumber)
     }
 
@@ -80,11 +82,11 @@ const RegisterForm: FC = () => {
                 }}
             >
                 <Typography component="h1" variant="h5" align="center">
-                    Register
+                    {t('registation')}
                 </Typography>
                 {isRegistered && (
                     <Alert severity="success" sx={{ mt: 2 }}>
-                        Successfully registered!
+                        Успешная регистрация!
                     </Alert>
                 )}
                 <Box
@@ -112,7 +114,7 @@ const RegisterForm: FC = () => {
                         fullWidth
                         margin="normal"
                         id="password"
-                        label="Password"
+                        label={t('password')}
                         type="password"
                         value={password}
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -124,7 +126,7 @@ const RegisterForm: FC = () => {
                         fullWidth
                         margin="normal"
                         id="firstName"
-                        label="First Name"
+                        label={t('name')}
                         type="text"
                         value={firstName}
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -136,7 +138,7 @@ const RegisterForm: FC = () => {
                         fullWidth
                         margin="normal"
                         id="lastName"
-                        label="Last Name"
+                        label={t('second_name')}
                         type="text"
                         value={lastName}
                         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -148,7 +150,7 @@ const RegisterForm: FC = () => {
                         fullWidth
                         margin="normal"
                         id="phone"
-                        label="Phone"
+                        label={t('phone')}
                         type="tel"
                         value={phone}
                         onChange={handlePhoneChange}
@@ -161,7 +163,7 @@ const RegisterForm: FC = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Register
+                        {t('registration')}
                     </Button>
                 </Box>
             </Box>

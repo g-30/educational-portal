@@ -1,6 +1,8 @@
 import React, { useState, FormEvent, ChangeEvent, FC } from 'react'
 import { Box, Button, TextField, Typography, Alert } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useAppStore } from '../../store/store'
+import { useTranslation } from 'react-i18next'
 
 interface LoginFormData {
     email: string
@@ -20,8 +22,9 @@ interface Data {
 const LoginForm: FC = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+    const { isLoggedIn, setLoggedIn } = useAppStore()
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -49,7 +52,7 @@ const LoginForm: FC = () => {
                     console.log(data)
                     setEmail('')
                     setPassword('')
-                    setIsLoggedIn(true)
+                    setLoggedIn(true)
                     localStorage.setItem('accessToken', data.access_token)
                     localStorage.setItem('refreshToken', data.refresh_token)
                     navigate('/courses')
@@ -69,11 +72,11 @@ const LoginForm: FC = () => {
                 }}
             >
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    {t('login')}
                 </Typography>
                 {isLoggedIn && (
                     <Alert severity="success" sx={{ mt: 2 }}>
-                        Successfully signed in!
+                        {t('login_success')}
                     </Alert>
                 )}
                 <Box
@@ -101,7 +104,7 @@ const LoginForm: FC = () => {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={t('login')}
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -116,7 +119,7 @@ const LoginForm: FC = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign In
+                        {t('login')}
                     </Button>
                 </Box>
             </Box>

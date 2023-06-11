@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material'
 
 const FooterContainer = styled('footer')({
@@ -16,9 +17,10 @@ const FooterContainer = styled('footer')({
 })
 
 const Footer: FC = () => {
+    const { t } = useTranslation()
     return (
         <FooterContainer>
-            <p>Made with ❤️ by Agartu</p>
+            <p>© {new Date().getFullYear()} Agartu. {t('rights')}</p>
         </FooterContainer>
     )
 }

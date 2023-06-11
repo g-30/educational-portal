@@ -4,8 +4,9 @@ import {
     CardActionArea,
     CardContent,
     Typography,
-    Badge,
     CardMedia,
+    Box,
+    Button,
 } from '@mui/material'
 import { Link } from 'react-router-dom'
 
@@ -18,10 +19,16 @@ interface Course {
     videos_count: number
 }
 
-const Course: FC<Course> = ({ alias, name, preview_url, videos_count }) => {
+const Course: FC<Course> = ({
+    alias,
+    name,
+    preview_url,
+    videos_count,
+    price,
+}) => {
     return (
         <Card sx={{ marginTop: '2rem', marginLeft: '.5rem' }}>
-            <CardActionArea component={Link} to={`/courses/${alias}`}>
+            <CardActionArea>
                 <CardMedia
                     component="img"
                     height="300"
@@ -30,14 +37,56 @@ const Course: FC<Course> = ({ alias, name, preview_url, videos_count }) => {
                     alt={name}
                 />
                 <CardContent>
-                    <Typography variant="h6" component="h3">
+                    <Typography
+                        variant="h6"
+                        component="h3"
+                        sx={{ mb: '0.5rem' }}
+                    >
                         {name}
-                        <Badge
-                            color="primary"
-                            badgeContent={videos_count}
-                            sx={{ marginBottom: '2rem', marginLeft: '.5rem' }}
-                        ></Badge>
                     </Typography>
+                    <Box
+                        sx={{
+                            backgroundColor: 'primary.main',
+                            color: 'white',
+                            display: 'inline-block',
+                            padding: '0.2rem 0.5rem',
+                            borderRadius: '0.3rem',
+                        }}
+                    >
+                        {price} тг
+                    </Box>
+                    <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ mt: '1rem' }}
+                    >
+                        Видео: {videos_count}
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                            marginTop: '0.2rem',
+                            borderRadius: '0.3rem',
+                        }}
+                        component={Link}
+                        to={`/purchase`}
+                    >
+                        Приобрести Курс
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                            marginTop: '0.2rem',
+                            marginLeft: '0.5rem',
+                            borderRadius: '0.3rem',
+                        }}
+                        component={Link}
+                        to={`/courses/${alias}`}
+                    >
+                        Просмотреть Курс
+                    </Button>
                 </CardContent>
             </CardActionArea>
         </Card>
