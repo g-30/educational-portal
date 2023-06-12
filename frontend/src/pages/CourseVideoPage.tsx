@@ -20,7 +20,7 @@ const CourseVideoPage: FC = () => {
 
     useEffect(() => {
         fetch(
-            `https://education.joji.one/caesar-panel/api/videos/${courseVideo}`
+            `/caesar-panel/api/videos/${courseVideo}`
         )
             .then((response) => response.json())
             .then(({ result }: { result: CourseVideo }) => {

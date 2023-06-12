@@ -15,7 +15,7 @@ const CoursesPage: FC = () => {
     const [courses, setCourses] = useState<Course[]>([])
 
     useEffect(() => {
-        fetch('https://education.joji.one/caesar-panel/api/courses')
+        fetch('/caesar-panel/api/courses')
             .then((response) => response.json())
             .then((data: { results: Course[] }) => setCourses(data.results))
             .catch((error) => console.error(error))

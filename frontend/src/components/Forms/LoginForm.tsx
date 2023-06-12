@@ -34,7 +34,7 @@ const LoginForm: FC = () => {
             password: password,
         }
 
-        fetch('https://education.joji.one/caesar-panel/auth/login', {
+        fetch('/caesar-panel/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

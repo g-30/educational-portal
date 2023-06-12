@@ -27,7 +27,7 @@ const CoursePage: FC = () => {
 
     useEffect(() => {
         fetch(
-            `https://education.joji.one/caesar-panel/api/courses/${courseName}`
+            `/caesar-panel/api/courses/${courseName}`
         )
             .then((response) => response.json())
             .then(({ result }: { result: Course }) => {

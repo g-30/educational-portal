@@ -43,7 +43,7 @@ const RegisterForm: FC = () => {
             phone: phone,
         }
 
-        fetch('https://education.joji.one/caesar-panel/api/register', {
+        fetch('/caesar-panel/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
