@@ -211,6 +211,7 @@ export default (router, { services, exceptions }) => {
 		const priceToPay = computeCoursePayment(courseData, paymentData);
 		if (paymentData == null) {
 			try {
+				const paymentsService = new ItemsService('payments', { schema: req.schema, accountability: req.accountability });
 				await paymentsService.createOne({
 					status: 'requested',
 					student_user_id: userUuid,
