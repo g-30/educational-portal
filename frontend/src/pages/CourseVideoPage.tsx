@@ -20,7 +20,14 @@ const CourseVideoPage: FC = () => {
 
     useEffect(() => {
         fetch(
-            `/caesar-panel/api/videos/${courseVideo}`
+            `/caesar-panel/api/videos/${courseVideo}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            }
         )
             .then((response) => response.json())
             .then(({ result }: { result: CourseVideo }) => {
