@@ -16,7 +16,7 @@ const CourseVideoPage: FC = () => {
     const [courseVideoData, setCourseVideoData] = useState<CourseVideo | null>(
         null
     )
-    const { courseVideo } = useParams<{ courseVideo: string }>()
+    const { courseVideo, courseName } = useParams<{ courseVideo: string, courseName: string }>()
 
     useEffect(() => {
         fetch(
@@ -46,7 +46,7 @@ const CourseVideoPage: FC = () => {
                 </Typography>
                 <Typography variant="body1">
                     Пожалуйста, для совершения платежа перейдите на{' '}
-                    <Link to="/purchase">
+                    <Link to={`/purchase/${courseName}`}>
                         <Button
                             variant="contained"
                             color="primary"

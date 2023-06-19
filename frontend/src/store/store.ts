@@ -6,6 +6,6 @@ interface AppStore {
 }
 
 export const useAppStore = create<AppStore>((set) => ({
-    isLoggedIn: false,
+    isLoggedIn: !!localStorage.getItem('accessToken'),
     setLoggedIn: (value) => set(() => ({ isLoggedIn: value })),
 }))

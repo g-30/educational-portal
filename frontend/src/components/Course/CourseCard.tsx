@@ -70,7 +70,7 @@ const Course: FC<Course> = ({
                             borderRadius: '0.3rem',
                         }}
                         component={Link}
-                        to={`/purchase`}
+                        to={`/purchase/${alias}`}
                     >
                         Приобрести Курс
                     </Button>

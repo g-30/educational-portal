@@ -52,8 +52,12 @@ export const router = createBrowserRouter([
                 ),
             },
             {
-                path: '/purchase',
-                element: <PurchasePage />,
+                path: '/purchase/:courseName',
+                element: (
+                    <PrivateRoute>
+                        <PurchasePage />,
+                    </PrivateRoute>
+                ),
             },
             {
                 path: '/tests',

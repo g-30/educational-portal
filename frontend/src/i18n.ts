@@ -18,7 +18,7 @@ i18n.use(initReactI18next).init({
             translation: kkTranslation,
         },
     },
-    lng: 'en', // Default language
+    lng: 'ru', // Default language
     fallbackLng: 'en', // Fallback language if translation is missing
     interpolation: {
         escapeValue: false, // React already escapes variables
