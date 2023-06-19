@@ -59,23 +59,27 @@ const PurchasePage = () => {
                 </Typography>
             </Grid>
             {priceToPay == null && (
-                <Grid item xs={12}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{
-                            marginTop: '0.2rem',
-                            marginBottom: '0.2rem',
-                            marginLeft: '0.5rem',
-                            borderRadius: '0.3rem',
-                        }}
-                        onClick={submit}
-                    >
-                        Отправить заявку
-                    </Button>
-                    <Typography variant="body1" align="center">
-                        После получения заявки, с вами свяжется менеджер для уточнения условий оплаты.
-                    </Typography>
+                <Grid container item xs={12} alignItems="center" justifyContent="center">
+                    <Grid container item xs={12} alignItems="center" justifyContent="center">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                marginTop: '0.2rem',
+                                marginBottom: '0.2rem',
+                                marginLeft: '0.5rem',
+                                borderRadius: '0.3rem',
+                            }}
+                            onClick={submit}
+                        >
+                            Отправить заявку
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="body1" align="center">
+                            После получения заявки, с вами свяжется менеджер для уточнения условий оплаты.
+                        </Typography>
+                    </Grid>
                 </Grid>
             )}
             {priceToPay != null && (
