@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent, FC } from 'react'
 import { Box, Button, TextField, Typography, Alert } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppStore } from '../../store/store'
 import { useTranslation } from 'react-i18next'
 
@@ -121,6 +121,18 @@ const LoginForm: FC = () => {
                     >
                         {t('login')}
                     </Button>
+                    <Link target='_blank' to={`/caesar-panel/admin/reset-password`}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            style={{
+                                marginLeft: '10px',
+                                marginTop: '32px',
+                            }}
+                        >
+                            Восстановить пароль
+                        </Button>
+                    </Link>
                 </Box>
             </Box>
         </Box>

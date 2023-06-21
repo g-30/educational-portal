@@ -20,11 +20,7 @@ const HomePage: FC = () => {
     const { t } = useTranslation()
 
     const handleStart = () => {
-        if (isLoggedIn) {
-            navigate('/courses')
-        } else {
-            navigate('/registration')
-        }
+        navigate('/courses')
     }
 
     return (

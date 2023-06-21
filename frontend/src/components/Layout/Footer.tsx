@@ -21,6 +21,8 @@ const Footer: FC = () => {
     return (
         <FooterContainer>
             <p>© {new Date().getFullYear()} Agartu. {t('rights')}</p>
+            <br/>
+            <p>По вопросам пишите: <b>janasu-info@mail.ru</b></p>
         </FooterContainer>
     )
 }

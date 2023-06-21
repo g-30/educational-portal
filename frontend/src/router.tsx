@@ -29,18 +29,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/courses',
-                element: (
-                    <PrivateRoute>
-                        <CoursesPage />
-                    </PrivateRoute>
-                ),
+                element: <CoursesPage />,
             },
             {
                 path: '/courses/:courseName',
                 element: (
-                    <PrivateRoute>
-                        <CoursePage />
-                    </PrivateRoute>
+                    <CoursePage />
                 ),
             },
             {
